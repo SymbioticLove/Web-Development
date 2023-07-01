@@ -7,6 +7,9 @@ let currentSlideIndex = 0;
 // Flag to indicate if scrolling is allowed
 let isScrollAllowed = true;
 
+// Flag to indicate if swiping is in progress
+let isSwiping = false;
+
 // Array to track if typing animation for each slide has been triggered
 const slideAnimationTriggered = [false, false];
 
@@ -48,6 +51,34 @@ function typeOutText(container, text, typingSpeed, elementType) {
     }, typingSpeed);
   });
 }
+
+// Add touch event listeners
+let touchStartY = 0;
+let touchEndY = 0;
+
+window.addEventListener('touchstart', function(event) {
+  touchStartY = event.touches[0].clientY;
+});
+
+window.addEventListener('touchend', function(event) {
+  touchEndY = event.changedTouches[0].clientY;
+  
+  // Calculate the distance between touch start and end positions
+  const swipeDistance = touchEndY - touchStartY;
+
+  // Threshold for swipe distance
+  const swipeThreshold = 50;
+
+  if (swipeDistance > swipeThreshold && isScrollAllowed) {
+    currentSlideIndex = Math.max(currentSlideIndex - 1, 0);
+    startTypingAnimation(); // Start typing animation for the new slide
+    updateScrollPosition();
+  } else if (swipeDistance < -swipeThreshold && isScrollAllowed) {
+    currentSlideIndex = Math.min(currentSlideIndex + 1, slides.length - 1);
+    startTypingAnimation(); // Start typing animation for the new slide
+    updateScrollPosition();
+  }
+});
 
 const slide1Images = [
   { src: './images/idea.jpg', alt: 'idea', caption: 'From idea...' },
@@ -158,14 +189,14 @@ startTypingAnimation();
 
 // Event listener for keyboard events
 window.addEventListener('keydown', function(event) {
-  if (event.key === 'ArrowDown' || event.key === 'ArrowRight') {
+  if (event.key === 'ArrowDown' || event.key === 'ArrowRight' || event.key === 'SwipeDown' || event.key === 'SwipeRight') {
     event.preventDefault();
     if (isScrollAllowed) {
       currentSlideIndex = Math.min(currentSlideIndex + 1, slides.length - 1);
       startTypingAnimation(); // Start typing animation for the new slide
       updateScrollPosition();
     }
-  } else if (event.key === 'ArrowUp' || event.key === 'ArrowLeft') {
+  } else if (event.key === 'ArrowUp' || event.key === 'ArrowLeft' || event.key === 'SwipeUp' || event.key === 'SwipeLeft') {
     event.preventDefault();
     if (isScrollAllowed) {
       currentSlideIndex = Math.max(currentSlideIndex - 1, 0);
@@ -185,33 +216,6 @@ window.addEventListener('wheel', function(event) {
     } else {
       currentSlideIndex = Math.max(currentSlideIndex - 1, 0);
     }
-    startTypingAnimation(); // Start typing animation for the new slide
-    updateScrollPosition();
-  }
-});
-
-// Touch start position
-let touchStartY = 0;
-
-// Event listener for touch start
-window.addEventListener('touchstart', function(event) {
-  touchStartY = event.touches[0].clientY;
-});
-
-// Event listener for touch end
-window.addEventListener('touchend', function(event) {
-  const touchEndY = event.changedTouches[0].clientY;
-  const touchDiff = touchEndY - touchStartY;
-
-  if (isScrollAllowed) {
-    if (touchDiff > 0 && touchDiff > 100) {
-      // Swiped down
-      currentSlideIndex = Math.max(currentSlideIndex - 1, 0);
-    } else if (touchDiff < 0 && touchDiff < -100) {
-      // Swiped up
-      currentSlideIndex = Math.min(currentSlideIndex + 1, slides.length - 1);
-    }
-
     startTypingAnimation(); // Start typing animation for the new slide
     updateScrollPosition();
   }
