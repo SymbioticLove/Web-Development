@@ -190,6 +190,33 @@ window.addEventListener('wheel', function(event) {
   }
 });
 
+// Touch start position
+let touchStartY = 0;
+
+// Event listener for touch start
+window.addEventListener('touchstart', function(event) {
+  touchStartY = event.touches[0].clientY;
+});
+
+// Event listener for touch end
+window.addEventListener('touchend', function(event) {
+  const touchEndY = event.changedTouches[0].clientY;
+  const touchDiff = touchEndY - touchStartY;
+
+  if (isScrollAllowed) {
+    if (touchDiff > 0 && touchDiff > 100) {
+      // Swiped down
+      currentSlideIndex = Math.max(currentSlideIndex - 1, 0);
+    } else if (touchDiff < 0 && touchDiff < -100) {
+      // Swiped up
+      currentSlideIndex = Math.min(currentSlideIndex + 1, slides.length - 1);
+    }
+
+    startTypingAnimation(); // Start typing animation for the new slide
+    updateScrollPosition();
+  }
+});
+
 // Disable scrolling using mouse wheel
 window.addEventListener('wheel', function(event) {
   event.preventDefault();
