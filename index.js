@@ -56,18 +56,22 @@ function typeOutText(container, text, typingSpeed, elementType) {
 let touchStartY = 0;
 let touchEndY = 0;
 
+// Add touch event listeners
+let touchStartY = 0;
+let touchEndY = 0;
+
 window.addEventListener('touchstart', function(event) {
   touchStartY = event.touches[0].clientY;
 });
 
 window.addEventListener('touchend', function(event) {
   touchEndY = event.changedTouches[0].clientY;
-  
+
   // Calculate the distance between touch start and end positions
   const swipeDistance = touchEndY - touchStartY;
 
   // Threshold for swipe distance
-  const swipeThreshold = 50;
+  const swipeThreshold = 100;
 
   if (swipeDistance > swipeThreshold && isScrollAllowed) {
     currentSlideIndex = Math.max(currentSlideIndex - 1, 0);
