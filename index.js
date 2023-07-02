@@ -13,6 +13,9 @@ const slideAnimationTriggered = [false, false];
 // Array to store the rendered content for each slide
 const slideContent = ['', '', ''];
 
+// Track rendering of slide1
+let isFirstSlideRendered = false;
+
 // Function to update the scroll position
 function updateScrollPosition() {
   const slideHeight = window.innerHeight;
@@ -56,21 +59,22 @@ const slide1Images = [
   { src: './images/deploy.jpg', alt: 'deploy', caption: 'To Deployment' }
 ];
 
-function fadeInImagesAndCaptions() {
+function slideInImagesAndCaptions() {
   const slide1Container = document.querySelector('.image-container');
+  const slideHeight = window.innerHeight;
 
   for (let i = 0; i < slide1Images.length; i++) {
     const image = document.createElement('img');
     image.src = slide1Images[i].src;
     image.alt = slide1Images[i].alt;
-    image.style.opacity = '0'; // Set initial opacity to 0
+    image.style.transform = `translateY(${slideHeight}px)`; // Set initial position below the screen
     slide1Container.appendChild(image);
 
     // Calculate the delay based on the index of the image
-    const delay = (i + 1) * 1400; // Delay each image by 1000ms (1 second)
+    const delay = (i) * 1200; // Delay each image by 1200ms (1 second) except the first
     setTimeout(() => {
-      image.style.transition = 'opacity 1s'; // Set transition duration
-      image.style.opacity = '1';
+      image.style.transition = 'transform 1.3s'; // Set transition duration for transform property
+      image.style.transform = 'translateY(0)'; // Move the image to its final resting position
     }, delay);
   }
 }
@@ -95,7 +99,7 @@ function startTypingAnimation() {
       { text: "With our modular pricing structure, we are able to fit our services to almost any budget", elementType: 'p'},
       { text: "Our goal is to get you online. We will do everything we can to make that happen", elementType: 'p'},
     ]
-    const typingSpeed = 65; // Speed in milliseconds between each character
+    const typingSpeed = 50; // Speed in milliseconds between each character
 
     async function typeOutSlide1() {
       const content = slideContent[0]; // Get the stored content for slide 1
@@ -104,12 +108,13 @@ function startTypingAnimation() {
       } else {
         for (let i = 0; i < slide1Lines.length; i++) {
           if (i === 2) {
-            fadeInImagesAndCaptions(); // Fade in images and captions when the third line is being typed
+            slideInImagesAndCaptions(); // Fade in images and captions when the third line is being typed
           }
           await typeOutText(slide1Container, slide1Lines[i].text, typingSpeed, slide1Lines[i].elementType);
           await new Promise((resolve) => setTimeout(resolve, 2000)); // Delay 2000ms before rendering the next line
         }
         slideContent[0] = slide1Container.innerHTML; // Store the rendered content for slide 1
+        isFirstSlideRendered = true;
       }
     }
 
@@ -160,14 +165,14 @@ startTypingAnimation();
 window.addEventListener('keydown', function(event) {
   if (event.key === 'ArrowDown' || event.key === 'ArrowRight') {
     event.preventDefault();
-    if (isScrollAllowed) {
+    if (isScrollAllowed && (currentSlideIndex !== 0 || isFirstSlideRendered)) {
       currentSlideIndex = Math.min(currentSlideIndex + 1, slides.length - 1);
       startTypingAnimation(); // Start typing animation for the new slide
       updateScrollPosition();
     }
   } else if (event.key === 'ArrowUp' || event.key === 'ArrowLeft') {
     event.preventDefault();
-    if (isScrollAllowed) {
+    if (isScrollAllowed && currentSlideIndex !== 0) {
       currentSlideIndex = Math.max(currentSlideIndex - 1, 0);
       startTypingAnimation(); // Start typing animation for the new slide
       updateScrollPosition();
@@ -178,7 +183,7 @@ window.addEventListener('keydown', function(event) {
 // Event listener for mousewheel events
 window.addEventListener('wheel', function(event) {
   event.preventDefault();
-  if (isScrollAllowed) {
+  if (isScrollAllowed && (currentSlideIndex !== 0 || isFirstSlideRendered)) {
     const delta = event.deltaY;
     if (delta > 0) {
       currentSlideIndex = Math.min(currentSlideIndex + 1, slides.length - 1);
