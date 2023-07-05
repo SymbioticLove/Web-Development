@@ -1,9 +1,10 @@
+/* Base styles */
 html {
     font-size: 100%;
 }
 body {
     margin: 0;
-    background: #000;
+    background: var(--secondary);
     overflow: hidden;
     user-select: none;
 }
@@ -11,10 +12,11 @@ body {
     --primary: #193b1e;
     --secondary: #e4f0df;
     --tertiary: #572cb5;
-    --font1: 'Ysabeau SC', sans-serif;
-    --font2: 'Lobster', cursive;
+    --font2: 'Shadows Into Light', cursive;
+    --font1: 'Space Grotesk', sans-serif;
 }
 
+/* General container styles */
 .slide {
     height: 100vh;
     width: 100vw;
@@ -24,7 +26,7 @@ body {
 }
 
 .slide-container {
-    background: #000;
+    background: var(--secondary);
     height: 100vh;
     width: 100vw;
 }
@@ -34,22 +36,85 @@ body {
     height: 50%;
 }
 
+/* Banner styles */
+.banner1 {
+    background-image: url(./images/teamwork.png);
+    height: 35vh;
+    width: 65%;
+    background-color: #000;
+    background-blend-mode: hard-light;
+    margin: 0;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.banner2 {
+    background-image: url(./images/organize.png);
+    height: 35vh;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: right;
+}
+.banner3 {
+    background-image: url(./images/design.png);
+    height: 35vh;
+    background-size: contain;
+    background-repeat: no-repeat;
+    margin: auto;
+    width: 80%;
+}
+.banner4 {
+    background-image: url(./images/develop.jpg);
+    height: 35vh;
+    background-size: cover;
+    background-position: center;
+}
+.banner5 {
+    background-image: url(./images/coding.png);
+    height: 35vh;
+    background-size: contain;
+    background-repeat: no-repeat;
+    margin: auto;
+    width: 65%;  
+}
+.banner6  {
+    height: 35vh;
+    display: flex;
+    justify-content: space-around;
+}
+
+.banner6 img {
+    height: 100%;
+    opacity: .6;
+}
+.banner7 {
+    height: 35vh;
+    display: flex;
+    justify-content: space-between;
+}
+.banner7 img {
+    height: 100%;
+    border-radius: 0 0 25px 0;
+}
+
+/* Styles for slide 1 text and containers */
 .inner-container1 {
     text-align: center;
-    color: var(--secondary);
+    color: var(--primary);
     margin: 2rem 0;
-    font-family: var(--font1);
 }
 .inner-container1 h1 {
-    font-size: 2.5rem;
+    font-size: 3rem;
     text-align: left;
-    margin-left: 5rem;
+    margin-left: 3rem;
+    font-family: var(--font1);
 }
 .inner-container1 h2 {
     font-size: 2rem;
-    font-family: var(--font1);
+    font-family: var(--font2);
     text-align: left;
     margin-left: 5rem;
+    letter-spacing: .1rem;
 }
 .inner-container1 p {
     margin: 18rem 0 0 5rem;
@@ -60,6 +125,7 @@ body {
     text-align: left;
 }
 
+/* Styles for slide 1 images and containers */
 .inner1-img-container {
     width: 100%;
 }
@@ -67,6 +133,7 @@ body {
     height: 250px;
     width: 300px;
     border-radius: 25px;
+    box-shadow: 0 0 10px #000;
 }
 
 .image-container {
@@ -74,48 +141,297 @@ body {
     justify-content: space-around;
 }
 
-.banner {
-    background-image: url(./images/code.jpg);
-    height: 35vh;
-    background-color: #000;
-    background-blend-mode: hard-light;
-    margin: 0;
-    background-size: cover;
-    width: 120%;
-    background-attachment: fixed;
+/* Styles for slide 2 text and containers */
+.inner-container2 {
+    background: #000;
+    height: 100%;
 }
-
 .inner-container2 h2 {
     color: var(--secondary);
     margin: 2rem 1rem 6rem 2rem;
-    font-size: 2.25rem;
-    letter-spacing: .1rem;
+    font-size: 2.5rem;
+    letter-spacing: .25rem;
     font-family: var(--font1);
     text-align: left;
 }
 .inner-container2 p {
     color: var(--secondary);
-    font-family: var(--font1);
+    font-family: var(--font2);
     font-size: 2rem;
-    margin: 0 0 9rem 5rem;
+    margin: 0 .75rem 9rem 5rem;
+    letter-spacing: .15rem;
 }
 
+/* Styles for slide 3 text and containers */
 .inner-container3 h2 {
-    color: var(--secondary);
+    color: var(--primary);
+    font-family: var(--font1);
+}
+.inner-container3 p {
+    color: var(--primary);
+    font-family: var(--font2);
 }
 
-.lower-container3 p {
-    color: var(--secondary);
+.design-list {
+    display: flex;
+    justify-content: space-around;
+    padding-inline-start: 1rem;
+    padding-inline-end: 1rem;
+}
+.design-list li {
+    list-style: none;
+    color: var(--primary);
+    font-family: var(--font2);
+    font-size: 2rem;
 }
 
-/* Laptops */ @media only screen and (max-width: 1300px) {
+.design-list2 {
+    margin-top: 3rem;
+}
+
+/* Styles for slide 4 text and containers */
+.inner-container4 {
+    background: var(--primary);
+    height: 100%;
+    background-image: url(./images/slide4-background.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-blend-mode: multiply;
+}
+.inner-container4 h2 {
+    color: var(--secondary);
+    width: fit-content;
+    font-family: var(--font1);
+}
+.inner-container4 p {
+    color: var(--secondary);
+    font-family: var(--font2);
+}
+
+/* Styles for slide 5 text and containers */
+.inner-container5 {
+    background: #000;
+    height: 100%;
+}
+.inner-container5 h2 {
+    color: var(--secondary);
+    font-family: var(--font1);
+}
+.inner-container5 p {
+    color: var(--secondary);
+    font-family: var(--font2);
+}
+
+/* Styles for slide 6 text and containers */
+.inner-container6 h2 {
+    color: var(--primary);
+    font-family: var(--font1);
+    display: flex;
+    justify-content: center;
+}
+.inner-container6 p {
+    color: var(--primary);
+    font-family: var(--font2);
+}
+
+/* Styles for slide 7 text and containers */
+.inner-container7 {
+    background: #fff;
+    height: 100%;
+}
+.inner-container7 h2 {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+/* Styles for slide 8 text and containers */
+.inner-container8 {
+    background: var(--primary);
+    height: 100%;
+}
+.inner-container8 h2 {
+    display: flex;
+    justify-content: flex-end;
+    flex-direction: column;
+    width: 55%;
+}
+
+/* Styles for slide 11 text and containers */
+
+/* Styles for slide 11 comparison containers */
+.inner-container11 h2 {
+    font-size: 2rem;
+    margin: .5rem auto 1.5rem;
+    width: fit-content;
+    font-family: var(--font1);
+    color: var(--primary);
+    letter-spacing: .1rem;
+}
+.fade11 {
+    opacity: 0;
+    transition: opacity 3s ease-in-out;
+    width: 28%;
+    height: 500px;
+    background: #fff;
+    border-radius: 15px;
+    border: solid 2px var(--primary);
+    box-shadow: 0 0 10px #000;
+}
+#us-container {
+    background-image: url(./images/logo11.svg);
+    background-color: var(--secondary);
+    background-blend-mode: screen;
+    background-position: center;
+}
+.fade11 ul {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    height: 85%;
+    list-style: none;
+    padding-inline-start: 0;
+}
+.fade11 h3 {
+    font-family: var(--font1);
+    color: var(--primary);
+    border-bottom: dashed 1px var(--tertiary);
+    width: 90%;
+    text-align: center;
+    margin: 0 auto;
+    padding: .5rem 0;
+}
+.fade11 li {
+    text-align: left;
+    margin-left: .5rem;
+    font-size: 1.15rem;
+    display: flex;
+    height: 60px;
+}
+span {
+    font-size: 1.5rem;
+    letter-spacing: .125rem;
+    font-weight: bold;
+}
+strong {
+    font-family: var(--font1);
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+.fade {
+    opacity: 1;
+}
+.inner-container11-content {
+    display: flex;
+    justify-content: space-around;
+}
+#container11-list1 > li:nth-child(1) span {
+    color: red;
+}
+#container11-list1 > li:nth-child(2) span {
+    color: green;
+}
+#container11-list1 > li:nth-child(3) span {
+    color: green;
+}
+#container11-list1 > li:nth-child(4) span {
+    color: green;
+}
+#container11-list1 > li:nth-child(5) span {
+    color: orange;
+}
+#container11-list1 > li:nth-child(6) span {
+    color: green;
+}
+#container11-list1 > li:nth-child(7) span {
+    color: green;
+}
+#container11-list1 > li:nth-child(8) span {
+    color: red;
+}
+#container11-list1 > li:nth-child(9) span {
+    color: red;
+}
+#container11-list1 > li:nth-child(10) span {
+    color: red;
+}
+
+#container11-list2 > li:nth-child(1) span {
+    color: orange;
+}
+#container11-list2 > li:nth-child(2) span {
+    color: orange;
+}
+#container11-list2 > li:nth-child(3) span {
+    color: orange;
+}
+#container11-list2 > li:nth-child(4) span {
+    color: orange;
+}
+#container11-list2 > li:nth-child(5) span {
+    color: orange;
+}
+#container11-list2 > li:nth-child(6) span {
+    color: red;
+}
+#container11-list2 > li:nth-child(7) span {
+    color: red;
+}
+#container11-list2 > li:nth-child(8) span {
+    color: red;
+}
+#container11-list2 > li:nth-child(9) span {
+    color: red;
+}
+#container11-list2 > li:nth-child(10) span {
+    color: red;
+}
+
+#container11-list3 > li:nth-child(1) span {
+    color: green;
+}
+#container11-list3 > li:nth-child(2) span {
+    color: green;
+}
+#container11-list3 > li:nth-child(3) span {
+    color: green;
+}
+#container11-list3 > li:nth-child(4) span {
+    color: green;
+}
+#container11-list3 > li:nth-child(5) span {
+    color: green;
+}
+#container11-list3 > li:nth-child(6) span {
+    color: green;
+}
+#container11-list3 > li:nth-child(7) span {
+    color: green;
+}
+#container11-list3 > li:nth-child(8) span {
+    color: green;
+}
+#container11-list3 > li:nth-child(9) span {
+    color: green;
+}
+#container11-list3 > li:nth-child(10) span {
+    color: green;
+}
+/* Media queries */
+
+/* Laptops */ 
+@media only screen and (max-width: 1300px) {
+    .banner2 {
+        margin-right: 15rem;
+    }
     .inner1-img-container img {
         height: 200px;
         width: 250px;
     }
 
     .inner-container1 p {
-        margin-top: 5rem;
+        margin-top: 3rem;
     }
 
     .inner-container2 h2 {
@@ -123,16 +439,17 @@ body {
         margin-top: 1rem;
     }
     .inner-container2 p {
-        margin-bottom: 1rem;
+        margin-bottom: 2rem;
     }
 }
 
-/* Portrait phones */ @media only screen and (max-width: 500px) and (orientation: portrait) {
+/* Portrait phones */ 
+@media only screen and (max-width: 500px) and (orientation: portrait) {
     .inner-container {
         height: 100%;
     }
 
-    .banner {
+    .banner1 {
         height: 40vh;
         background-position: center center;
         width: 100%;
