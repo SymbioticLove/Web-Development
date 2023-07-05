@@ -53,10 +53,10 @@ function typeOutText(container, text, typingSpeed, elementType) {
 }
 
 const slide1Images = [
-  { src: './images/idea.jpg', alt: 'idea', caption: 'From idea...' },
-  { src: './images/meet.jpg', alt: 'meet', caption: 'To Design...' },
-  { src: './images/code.jpg', alt: 'develop', caption: 'To Development...' },
-  { src: './images/deploy.jpg', alt: 'deploy', caption: 'To Deployment' }
+  { src: './images/idea.jpg', alt: 'idea'},
+  { src: './images/meet.jpg', alt: 'meet'},
+  { src: './images/code.jpg', alt: 'develop'},
+  { src: './images/deploy.jpg', alt: 'deploy'}
 ];
 
 function slideInImagesAndCaptions() {
@@ -141,8 +141,7 @@ function startTypingAnimation() {
     const slide10Lines = [
       { text: "For sites such as portfolio websites, informational pages, business sites, or blog pages that do not require a dedicated server, we prefer to use React", elementType: 'p'},
       { text: "For sites that need user login portals, paywalls, forums, or services that do require a dedicated server, we like to build that server with Python and Flask", elementType: 'p'},
-      { text: "When we're looking for an eCommerce solution, we look no further than Shopify's Liquid framework", elementType: 'p'},
-      { text: "These are our preferences and what we believe offers the most modularity, but if you have specific needs we can accomodate them", elementType: 'p'}
+      { text: "When we need an eCommerce solution, we look no further than our Shopify developer partnership", elementType: 'p'}
     ];
 
 
@@ -360,6 +359,33 @@ function startTypingAnimation() {
       }
     }
 
+    const slide10Images = [
+      { src: './images/react.png', alt: 'React logo' },
+      { src: './images/flask.png', alt: 'Flask logo' },
+      { src: './images/shopify.svg', alt: 'Shopify partner logo' }
+    ];
+    
+    function fadeImagesIntoContainers(images, container, fadeDuration) {
+      images.forEach((image, index) => {
+        const { src, alt } = image;
+        const img = new Image();
+        img.src = src;
+        img.alt = alt;
+        img.style.opacity = '0';
+        img.style.transition = `opacity ${fadeDuration}ms`;
+    
+        if (index === 0 && src === './images/react.png') {
+          img.setAttribute('id', 'react-image');
+        }
+    
+        img.addEventListener('load', () => {
+          img.style.opacity = '1';
+        });
+    
+        container.appendChild(img);
+      });
+    }                
+
     async function typeOutSlide10() {
       const content = slideContent[9];
       if (content) {
@@ -370,13 +396,17 @@ function startTypingAnimation() {
           await new Promise((resolve) => setTimeout(resolve, 1500));
         }
         slideContent[9] = slide10Container.innerHTML;
+        const imageContainers = document.querySelectorAll('.image-container2');
+        for (let i = 0; i < imageContainers.length; i++) {
+          fadeImagesIntoContainers([slide10Images[i]], imageContainers[i], 1000);
+        }
       }
-    }
+    }  
 
     document.getElementsByClassName('fade11');
-    const slide11List1 = ['$5,000+', 'None', 'Full', 'Comprehensive', 'Varies', '\u2713',  '\u2713', '\u{1D465}', '\u{1D465}', '\u{1D465}'];
-    const slide11List2 = ['$5-$500/month+', 'Varies', 'Limited', 'Limited', 'Basic(paid)', '\u{1D465}', '\u{1D465}', '\u{1D465}', '\u{1D465}', '\u{1D465}'];
-    const slide11List3 = ['$100+', 'None', 'Full', 'Comprehensive', '90 Days', '\u2713', '\u2713', '\u2713', '\u2713', '\u2713'];
+    const slide11List1 = ['$5,000+', 'None', 'Full', 'Comprehensive', 'Varies', '✔',  '✔', '✘', '✘', '✘'];
+    const slide11List2 = ['$5-$500/month+', 'Varies', 'Limited', 'Limited', 'Basic(paid)', '✘', '✘', '✘', '✘', '✘'];
+    const slide11List3 = ['$100+', 'None', 'Full', 'Comprehensive', '90 Days', '✔', '✔', '✔', '✔', '✔'];
     
     async function typeOutSlide11() {
       // Apply the 'fade' class to all elements with class 'fade11'
@@ -393,7 +423,7 @@ function startTypingAnimation() {
     
         await new Promise(resolve => setTimeout(resolve, 2500));
     
-        let delay = 1500;
+        let delay = 1000;
         let skipDelay = false;
         let typingSpeedModifier = 1;
     

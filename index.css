@@ -6,6 +6,7 @@ body {
     margin: 0;
     background: var(--secondary);
     overflow: hidden;
+    -webkit-user-select: none;
     user-select: none;
 }
 :root {
@@ -56,12 +57,13 @@ body {
     background-position: right;
 }
 .banner3 {
-    background-image: url(./images/design.png);
     height: 35vh;
-    background-size: contain;
-    background-repeat: no-repeat;
-    margin: auto;
-    width: 80%;
+    display: flex;
+    justify-content: center;
+}
+.banner3 img {
+    height: 35vh;
+    margin-left: 10rem;
 }
 .banner4 {
     background-image: url(./images/develop.jpg);
@@ -95,6 +97,25 @@ body {
 .banner7 img {
     height: 100%;
     border-radius: 0 0 25px 0;
+}
+.banner8 {
+    height: 35vh;
+}
+.banner8 img {
+    height: 100%;
+    margin-left: 12rem;
+}
+.banner9 {
+    height: 35vh;
+    display: flex;
+    justify-content: center;
+}
+.banner9 img {
+    height: 90%;
+    border-radius: 25px;
+    box-shadow: 0 0 10px #000;
+    margin-top: 1rem;
+    border: 2px solid var(--primary);
 }
 
 /* Styles for slide 1 text and containers */
@@ -200,12 +221,22 @@ body {
 }
 .inner-container4 h2 {
     color: var(--secondary);
+    width: -moz-fit-content;
     width: fit-content;
     font-family: var(--font1);
+    margin: 1rem auto 1.5rem;
+    letter-spacing: .085rem;
 }
 .inner-container4 p {
     color: var(--secondary);
     font-family: var(--font2);
+    text-align: center;
+}
+
+.inner-container4-content {
+    display: flex;
+    justify-content: space-around;
+    flex-direction: column;
 }
 
 /* Styles for slide 5 text and containers */
@@ -257,15 +288,52 @@ body {
     width: 55%;
 }
 
+/* Styles for slide 9 text and containers */
+.inner-container9 {
+    background: #000;
+    height: 100%;
+}
+.inner-container9 h2 {
+    color: var(--secondary);
+    font-family: var(--font1);
+    margin-top: 0;
+}
+
+/* Styles for slide 10 text and containers */
+.inner10-image-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 2rem;
+}
+
+#react-image {
+    width: 40%;
+    margin-right: 0;
+}
+
+.image-container2 {
+    width: 28%;
+    text-align: center;
+}
+.image-container2 img {
+    width: 80%;
+    margin-right: 4rem;
+}
+
 /* Styles for slide 11 text and containers */
 
 /* Styles for slide 11 comparison containers */
+.inner-container11 {
+    background: var(--primary);
+    height: 100%;
+}
 .inner-container11 h2 {
     font-size: 2rem;
-    margin: .5rem auto 1.5rem;
+    margin: -.25rem auto 1.5rem;
+    width: -moz-fit-content;
     width: fit-content;
     font-family: var(--font1);
-    color: var(--primary);
+    color: var(--secondary);
     letter-spacing: .1rem;
 }
 .fade11 {
@@ -326,96 +394,27 @@ strong {
     display: flex;
     justify-content: space-around;
 }
-#container11-list1 > li:nth-child(1) span {
+
+#container11-list1 > li:nth-child(1) span,
+#container11-list1 > li:nth-child(n+8):nth-child(-n+10) span {
     color: red;
 }
-#container11-list1 > li:nth-child(2) span {
-    color: green;
-}
-#container11-list1 > li:nth-child(3) span {
-    color: green;
-}
-#container11-list1 > li:nth-child(4) span {
+#container11-list1 > li:nth-child(n+2):nth-child(-n+4) span,
+#container11-list1 > li:nth-child(n+6):nth-child(-n+7) span {
     color: green;
 }
 #container11-list1 > li:nth-child(5) span {
     color: orange;
 }
-#container11-list1 > li:nth-child(6) span {
-    color: green;
-}
-#container11-list1 > li:nth-child(7) span {
-    color: green;
-}
-#container11-list1 > li:nth-child(8) span {
-    color: red;
-}
-#container11-list1 > li:nth-child(9) span {
-    color: red;
-}
-#container11-list1 > li:nth-child(10) span {
+
+#container11-list2 > li:nth-child(n+1):nth-child(-n+5) span {
+    color: orange;
+}  
+#container11-list2 > li:nth-child(n+6):nth-child(-n+10) span {
     color: red;
 }
 
-#container11-list2 > li:nth-child(1) span {
-    color: orange;
-}
-#container11-list2 > li:nth-child(2) span {
-    color: orange;
-}
-#container11-list2 > li:nth-child(3) span {
-    color: orange;
-}
-#container11-list2 > li:nth-child(4) span {
-    color: orange;
-}
-#container11-list2 > li:nth-child(5) span {
-    color: orange;
-}
-#container11-list2 > li:nth-child(6) span {
-    color: red;
-}
-#container11-list2 > li:nth-child(7) span {
-    color: red;
-}
-#container11-list2 > li:nth-child(8) span {
-    color: red;
-}
-#container11-list2 > li:nth-child(9) span {
-    color: red;
-}
-#container11-list2 > li:nth-child(10) span {
-    color: red;
-}
-
-#container11-list3 > li:nth-child(1) span {
-    color: green;
-}
-#container11-list3 > li:nth-child(2) span {
-    color: green;
-}
-#container11-list3 > li:nth-child(3) span {
-    color: green;
-}
-#container11-list3 > li:nth-child(4) span {
-    color: green;
-}
-#container11-list3 > li:nth-child(5) span {
-    color: green;
-}
-#container11-list3 > li:nth-child(6) span {
-    color: green;
-}
-#container11-list3 > li:nth-child(7) span {
-    color: green;
-}
-#container11-list3 > li:nth-child(8) span {
-    color: green;
-}
-#container11-list3 > li:nth-child(9) span {
-    color: green;
-}
-#container11-list3 > li:nth-child(10) span {
+#container11-list3 span {
     color: green;
 }
 /* Media queries */
