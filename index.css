@@ -17,7 +17,7 @@ body {
     --font1: 'Space Grotesk', sans-serif;
 }
 
-/* General container styles */
+/* General styles */
 .slide {
     height: 100vh;
     width: 100vw;
@@ -35,6 +35,9 @@ body {
 .inner-container {
     width: 100%;
     height: 50%;
+}
+#bold {
+    font-weight: bold;
 }
 
 /* Banner styles */
@@ -55,6 +58,7 @@ body {
     background-size: contain;
     background-repeat: no-repeat;
     background-position: right;
+    margin-right: 2rem;
 }
 .banner3 {
     height: 35vh;
@@ -88,6 +92,7 @@ body {
 .banner6 img {
     height: 100%;
     opacity: .6;
+    margin-top: 5rem;
 }
 .banner7 {
     height: 35vh;
@@ -103,19 +108,20 @@ body {
 }
 .banner8 img {
     height: 100%;
-    margin-left: 12rem;
+    margin-left: 31rem;
 }
 .banner9 {
-    height: 35vh;
+    height: 25vh;
     display: flex;
     justify-content: center;
 }
 .banner9 img {
-    height: 90%;
+    height: 35vh;
     border-radius: 25px;
     box-shadow: 0 0 10px #000;
-    margin-top: 1rem;
+    margin-top: 3rem;
     border: 2px solid var(--primary);
+    margin-left: 39rem;
 }
 
 /* Styles for slide 1 text and containers */
@@ -125,23 +131,23 @@ body {
     margin: 2rem 0;
 }
 .inner-container1 h1 {
-    font-size: 3rem;
+    font-size: 4rem;
     text-align: left;
     margin-left: 3rem;
     font-family: var(--font1);
 }
 .inner-container1 h2 {
-    font-size: 2rem;
+    font-size: 3rem;
     font-family: var(--font2);
     text-align: left;
     margin-left: 5rem;
     letter-spacing: .1rem;
 }
 .inner-container1 p {
-    margin: 18rem 0 0 5rem;
+    margin: 6rem 0 0 5rem;
     font-family: var(--font2);
     color: var(--tertiary);
-    font-size: 1.5rem;
+    font-size: 2.5rem;
     letter-spacing: .15rem;
     text-align: left;
 }
@@ -151,8 +157,8 @@ body {
     width: 100%;
 }
 .inner1-img-container img {
-    height: 250px;
-    width: 300px;
+    height: 300px;
+    width: 350px;
     border-radius: 25px;
     box-shadow: 0 0 10px #000;
 }
@@ -170,7 +176,7 @@ body {
 .inner-container2 h2 {
     color: var(--secondary);
     margin: 2rem 1rem 6rem 2rem;
-    font-size: 2.5rem;
+    font-size: 3.5rem;
     letter-spacing: .25rem;
     font-family: var(--font1);
     text-align: left;
@@ -178,8 +184,8 @@ body {
 .inner-container2 p {
     color: var(--secondary);
     font-family: var(--font2);
-    font-size: 2rem;
-    margin: 0 .75rem 9rem 5rem;
+    font-size: 3rem;
+    margin: 0 .75rem 6rem 5rem;
     letter-spacing: .15rem;
 }
 
@@ -187,10 +193,19 @@ body {
 .inner-container3 h2 {
     color: var(--primary);
     font-family: var(--font1);
+    font-size: 3rem;
+    display: flex;
+    justify-content: flex-end;
+    margin-right: 2rem;
 }
 .inner-container3 p {
     color: var(--primary);
     font-family: var(--font2);
+    font-size: 2.25rem;
+    margin-left: 4rem;
+}
+.second-p {
+    margin-bottom: 5rem;
 }
 
 .design-list {
@@ -201,7 +216,7 @@ body {
 }
 .design-list li {
     list-style: none;
-    color: var(--primary);
+    color: var(--tertiary);
     font-family: var(--font2);
     font-size: 2rem;
 }
@@ -226,11 +241,13 @@ body {
     font-family: var(--font1);
     margin: 1rem auto 1.5rem;
     letter-spacing: .085rem;
+    font-size: 3rem;
 }
 .inner-container4 p {
     color: var(--secondary);
     font-family: var(--font2);
     text-align: center;
+    font-size: 2rem;
 }
 
 .inner-container4-content {
@@ -244,13 +261,22 @@ body {
     background: #000;
     height: 100%;
 }
+.inner-container5-content {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+}
 .inner-container5 h2 {
     color: var(--secondary);
     font-family: var(--font1);
+    font-size: 3rem;
+    margin-left: 1rem;
 }
 .inner-container5 p {
     color: var(--secondary);
     font-family: var(--font2);
+    font-size: 2rem;
+    margin-left: 5rem;
 }
 
 /* Styles for slide 6 text and containers */
@@ -259,10 +285,15 @@ body {
     font-family: var(--font1);
     display: flex;
     justify-content: center;
+    font-size: 3rem;
+    margin: 1rem;
+    margin-bottom: 7rem;
 }
 .inner-container6 p {
     color: var(--primary);
     font-family: var(--font2);
+    font-size: 2rem;
+    margin-left: 3rem;
 }
 
 /* Styles for slide 7 text and containers */
@@ -272,8 +303,17 @@ body {
 }
 .inner-container7 h2 {
     display: flex;
-    justify-content: center;
+    justify-content: flex-end;
     flex-direction: column;
+    font-family: var(--font1);
+    color: var(--primary);
+    font-size: 4rem;
+}
+.inner-container7 p {
+    font-size: 2rem;
+    font-family: var(--font2);
+    color: var(--tertiary);
+    margin: 1rem 1rem 3rem 2rem;
 }
 
 /* Styles for slide 8 text and containers */
@@ -286,6 +326,16 @@ body {
     justify-content: flex-end;
     flex-direction: column;
     width: 55%;
+    color: var(--secondary);
+    font-family: var(--font1);
+    font-size: 3rem;
+    margin: 1rem 7rem 3rem;
+}
+.inner-container8 p {
+    color: var(--secondary);
+    font-family: var(--font2);
+    font-size: 2.25rem;
+    margin: 3rem 2rem 5rem;
 }
 
 /* Styles for slide 9 text and containers */
@@ -296,14 +346,34 @@ body {
 .inner-container9 h2 {
     color: var(--secondary);
     font-family: var(--font1);
-    margin-top: 0;
+    margin: 0 0 5rem 2rem;
+    font-size: 3rem;
+}
+.inner-container9 p {
+    color: var(--secondary);
+    font-family: var(--font2);
+    font-size: 2.25rem;
+    margin: 1rem 1rem 3rem 4rem;
 }
 
 /* Styles for slide 10 text and containers */
 .inner10-image-container {
     display: flex;
-    justify-content: center;
-    margin-top: 2rem;
+    justify-content: space-between;
+    margin-top: 4rem;
+}
+
+.inner-container10 h2 {
+    color: var(--primary);
+    font-family: var(--font1);
+    font-size: 3rem;
+    margin-left: 4rem;
+}
+.inner-container10 p {
+    font-size: 1.75rem;
+    font-family: var(--font2);
+    color: var(--primary);
+    margin-left: 4rem;
 }
 
 #react-image {
@@ -311,8 +381,22 @@ body {
     margin-right: 0;
 }
 
+#illustrator-image {
+    height: 45%;
+}
+
+#figma-image {
+    width: 30%;
+    margin-left: -7rem;
+    margin-top: -1rem;
+}
+
+#shopify-image {
+    margin-left: 2rem;
+}
+
 .image-container2 {
-    width: 28%;
+    width: 16%;
     text-align: center;
 }
 .image-container2 img {
@@ -328,13 +412,14 @@ body {
     height: 100%;
 }
 .inner-container11 h2 {
-    font-size: 2rem;
-    margin: -.25rem auto 1.5rem;
+    font-size: 4rem;
+    margin: 0 auto 7rem;
     width: -moz-fit-content;
     width: fit-content;
     font-family: var(--font1);
     color: var(--secondary);
     letter-spacing: .1rem;
+    padding-top: 2rem;
 }
 .fade11 {
     opacity: 0;
@@ -418,7 +503,11 @@ strong {
     color: green;
 }
 /* Media queries */
-
+@media only screen and (max-width: 1700px) {
+    .inner10-image-container {
+        margin-top: 2rem;
+    }
+}
 /* Laptops */ 
 @media only screen and (max-width: 1300px) {
     .banner2 {

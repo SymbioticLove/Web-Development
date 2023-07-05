@@ -104,12 +104,12 @@ function startTypingAnimation() {
     ];
     const slide3Lines = [
       { text: "This is the part of the process where you will be most involved, guiding us to see what you see", elementType: 'p'},
-      { text: "You are empowered to lead your own project. Together, we'll figure out things like...", elementType: 'p'}
+      { text: "You are empowered to lead your own project. You'll help us figure out...", elementType: 'p'}
     ];
     const slide3List1 = ['Color schemes', 'Typography', 'Logo design', 'Brand image', 'Necessary functionality'];
     const slide3List2 = ['Long-term goals', 'Cost comparisons', 'Building your tech stack', 'SEO', 'and more!'];
     const slide4Lines = [
-      { text: "Our talented lead designer will transfer the mock-up onto the screen using technologies like Adobe Illustrator and Figma", elementType: 'p'},
+      { text: "Our talented lead designer will transfer the mock-up onto the screen", elementType: 'p'},
       { text: "We will request your opinion throughout the process to make sure we are capturing your vision exactly", elementType: 'p'},
       { text: "Then, the wireframes will be delivered to you for final approval", elementType: 'p'}
     ];
@@ -121,7 +121,7 @@ function startTypingAnimation() {
     const slide6Lines = [
       { text: "This is where we truly start to set ourselves apart from the competition", elementType: 'p'},
       { text: "We handle domain purchase and DNS setup, domain propogation and TLS certification, as well as anything else that is needed to get your site up and running", elementType: 'p'},
-      { text: "But getting you up and running is not the end of our commitment or our responsibility", elementType: 'p'}
+      { text: "But getting you up and running is not the end of our commitment", elementType: 'p'}
     ];
     const slide7Lines = [
       { text: "Yep! Next, we will fully optimize your website", elementType: 'p'},
@@ -139,9 +139,11 @@ function startTypingAnimation() {
       { text: "We are the last place you will ever need to go for your web services. Speaking of those technologies...", elementType: 'p'}
     ];
     const slide10Lines = [
+      { text: "For wireframing and mock-ups, we use Adobe Illustrator and Figma", elementType: 'p'},
       { text: "For sites such as portfolio websites, informational pages, business sites, or blog pages that do not require a dedicated server, we prefer to use React", elementType: 'p'},
-      { text: "For sites that need user login portals, paywalls, forums, or services that do require a dedicated server, we like to build that server with Python and Flask", elementType: 'p'},
-      { text: "When we need an eCommerce solution, we look no further than our Shopify developer partnership", elementType: 'p'}
+      { text: "For sites that need user login portals, paywalls, forums, or services that do require a dedicated server to store data, we like to build that server with Python and Flask", elementType: 'p'},
+      { text: "When we need an eCommerce solution, we look no further than our Shopify developer partnership", elementType: 'p'},
+      { text: "We are also fully capable of creating static HTML, CSS and JavaScript sites. Inspect this source code!", elementType: 'p'}
     ];
 
 
@@ -277,9 +279,14 @@ function startTypingAnimation() {
         slideContent[2] = slide3Container.innerHTML;
       }
     
+      const paragraphs = slide3Container.getElementsByTagName('p');
+      if (paragraphs.length >= 2) {
+        paragraphs[1].classList.add('second-p');
+      }
+    
       await fadeInSlide3List1(); // Render and fade-in list 1
       await fadeInSlide3List2(); // Render and fade-in list 2
-    }
+    }    
 
     async function typeOutSlide4() {
       const content = slideContent[3];
@@ -362,7 +369,9 @@ function startTypingAnimation() {
     const slide10Images = [
       { src: './images/react.png', alt: 'React logo' },
       { src: './images/flask.png', alt: 'Flask logo' },
-      { src: './images/shopify.svg', alt: 'Shopify partner logo' }
+      { src: './images/shopify.svg', alt: 'Shopify partner logo' },
+      { src: './images/illustrator.svg', alt: 'Shopify partner logo' },
+      { src: './images/figma.png', alt: 'Shopify partner logo' },
     ];
     
     function fadeImagesIntoContainers(images, container, fadeDuration) {
@@ -374,6 +383,14 @@ function startTypingAnimation() {
         img.style.opacity = '0';
         img.style.transition = `opacity ${fadeDuration}ms`;
     
+        if (src === './images/illustrator.svg') {
+          img.setAttribute('id', 'illustrator-image');
+        } else if (src === './images/figma.png') {
+          img.setAttribute('id', 'figma-image');
+        } else if (src == './images/shopify.svg') {
+          img.setAttribute('id', 'shopify-image');
+        }
+    
         if (index === 0 && src === './images/react.png') {
           img.setAttribute('id', 'react-image');
         }
@@ -384,7 +401,7 @@ function startTypingAnimation() {
     
         container.appendChild(img);
       });
-    }                
+    }                   
 
     async function typeOutSlide10() {
       const content = slideContent[9];
@@ -416,10 +433,9 @@ function startTypingAnimation() {
       }
     
       // Helper function to type out list items with a delay between each
-      const typeOutListItems = async (list, containerId, typingSpeed) => {
+      const typeOutListItems = async (list, containerId) => {
         const container = document.getElementById(containerId);
         const existingListItems = container.getElementsByTagName('li');
-        const containerHeight = container.offsetHeight;
     
         await new Promise(resolve => setTimeout(resolve, 2500));
     
