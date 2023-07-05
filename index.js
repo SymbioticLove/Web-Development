@@ -55,7 +55,7 @@ function typeOutText(container, text, typingSpeed, elementType) {
 const slide1Images = [
   { src: './images/idea.jpg', alt: 'idea', caption: 'From idea...' },
   { src: './images/meet.jpg', alt: 'meet', caption: 'To Design...' },
-  { src: './images/develop.jpg', alt: 'develop', caption: 'To Development...' },
+  { src: './images/code.jpg', alt: 'develop', caption: 'To Development...' },
   { src: './images/deploy.jpg', alt: 'deploy', caption: 'To Deployment' }
 ];
 
@@ -155,12 +155,19 @@ function startTypingAnimation() {
         let slideTriggered = false; // Flag to indicate if the image slide function has been triggered
     
         for (let i = 0; i < slide1Lines.length; i++) {
-          if (i === 2 && !slideTriggered) {
-            slideTriggered = true;
-            slideInImagesAndCaptions(); // Fade in images and captions when the third line is being typed
-          }
+          const typingPromise = new Promise((resolve) => {
+            const typeText = () => {
+              resolve(typeOutText(slide1Container, slide1Lines[i].text, typingSpeed, slide1Lines[i].elementType));
+            };
     
-          const typingPromise = typeOutText(slide1Container, slide1Lines[i].text, typingSpeed, slide1Lines[i].elementType);
+            // Apply the delay of 1500ms only if enter or space key were not pressed
+            if (!slideTriggered) {
+              setTimeout(typeText, i * 1500);
+            } else {
+              typeText(); // Trigger immediate typing without delay
+            }
+          });
+    
           const enterPromise = new Promise((resolve) => {
             // Listen for the enter key press event
             const handleKeyPress = (event) => {
@@ -180,6 +187,13 @@ function startTypingAnimation() {
           // Wait for either typing to complete or enter key/spacebar to be pressed
           await Promise.race([typingPromise, enterPromise]);
     
+          if (i === 1 && !slideTriggered) {
+            // Add a delay of 1500ms before triggering the image slide
+            await new Promise((resolve) => setTimeout(resolve, 1500));
+            slideTriggered = true;
+            slideInImagesAndCaptions(); // Fade in images and captions when the third line is being typed
+          }
+    
           if (i === slide1Lines.length - 1) {
             isSlide1Rendered = true; // Set the variable to true after the final line is typed
           }
@@ -193,7 +207,7 @@ function startTypingAnimation() {
           isFirstSlideRendered = true; // Set the variable to true after the final line is typed
         }
       }
-    }            
+    }                    
 
     async function typeOutSlide2() {
       const content = slideContent[1]; // Get the stored content for slide 2
