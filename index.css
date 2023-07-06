@@ -91,7 +91,6 @@ body {
 
 .banner6 img {
     height: 100%;
-    opacity: .6;
     margin-top: 5rem;
 }
 .banner7 {
@@ -298,7 +297,7 @@ body {
 
 /* Styles for slide 7 text and containers */
 .inner-container7 {
-    background: #fff;
+    background: #000;
     height: 100%;
 }
 .inner-container7 h2 {
@@ -306,7 +305,7 @@ body {
     justify-content: flex-end;
     flex-direction: column;
     font-family: var(--font1);
-    color: var(--primary);
+    color: var(--secondary);
     font-size: 4rem;
 }
 .inner-container7 p {

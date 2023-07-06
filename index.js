@@ -11,7 +11,7 @@ let isScrollAllowed = true;
 const slideAnimationTriggered = [false, false];
 
 // Array to store the rendered content for each slide
-const slideContent = ['', '', '', ''];
+const slideContent = [];
 
 // Track rendering of slide1
 let isFirstSlideRendered = false;
@@ -92,63 +92,68 @@ function startTypingAnimation() {
     const slide8Container = document.querySelector('.inner-container8-content');
     const slide9Container = document.querySelector('.inner-container9-content');
     const slide10Container = document.querySelector('.inner-container10-content');
-    const typingSpeed = 50; // Speed in milliseconds between each character
-    const slide1Lines = [
-      { text: "Welcome to your comprehensive solution to web services!", elementType: 'h1' },
-      { text: "We are your one-stop shop for getting your idea onto the web", elementType: 'h2' },
-      { text: "From idea to design to development to deployment, we will be with you every step of the way!", elementType: 'p'}
+    let typingSpeed = 50; // Speed in milliseconds between each character
+    const slideLines = [
+      [
+        { text: "Welcome to your comprehensive solution to web services!", elementType: 'h1' },
+        { text: "We are your one-stop shop for getting your idea onto the web", elementType: 'h2' },
+        { text: "From idea to design to development to deployment, we will be with you every step of the way!", elementType: 'p'}
+      ],
+      [
+        { text: "Our process starts with a free consultation with our lead developer", elementType: 'p' },
+        { text: "You'll discuss your needs, pain points and goals, as well get a technical overview of your project, timeframe and cost", elementType: 'p' }
+      ],
+      [
+        { text: "This is the part of the process where you will be most involved, guiding us to see what you see", elementType: 'p'},
+        { text: "You are empowered to lead your own project. You'll help us figure out...", elementType: 'p'}
+      ],
+      [
+        { text: "Our talented lead designer will transfer the mock-up onto the screen", elementType: 'p'},
+        { text: "We will request your opinion throughout the process to make sure we are capturing your vision exactly", elementType: 'p'},
+        { text: "Then, the wireframes will be delivered to you for final approval", elementType: 'p'}
+      ],
+      [
+        { text: "Kick back and relax. Your project has now been passed to our development team, and they're hard at work", elementType: 'p'},
+        { text: "They will recreate the wireframe perfectly, as well as add in the functionality you laid out earlier", elementType: 'p'},
+        { text: "You may request a check-in at any time! You will be in direct contact with the lead developer from start to finish", elementType: 'p'}
+      ],
+      [
+        { text: "This is where we truly start to set ourselves apart from the competition", elementType: 'p'},
+        { text: "We handle domain purchase and DNS setup, domain propagation and TLS certification, as well as anything else that is needed to get your site up and running", elementType: 'p'},
+        { text: "But getting you up and running is not the end of our commitment", elementType: 'p'}
+      ],
+      [
+        { text: "So our next step is to fully optimize your website", elementType: 'p'},
+        { text: "From SEO to accessibility to performance, we will get your site running perfectly, not just running", elementType: 'p'},
+        { text: "But even getting it running perfectly still isn't the end!", elementType: 'p'}
+      ],
+      [
+        { text: "That's why we'll take 3 months to teach you while providing comprehensive technical support", elementType: 'p'},
+        { text: "Through 1-on-1 training, you'll learn exactly what you need to know to make the best use of your new website", elementType: 'p'},
+        { text: "Our development team are fastidious documenters. If you are inclined, we will also show you how to lightly modify your system", elementType: 'p'}
+      ],
+      [
+        { text: "All of the technologies we use are lightweight and highly modular, allowing them to be built upon easily", elementType: 'p'},
+        { text: "When you are ready to add new features into your website or service, we will be able to do so quickly and efficiently", elementType: 'p'},
+        { text: "About those technologies...", elementType: 'p'}
+      ],
+      [
+        { text: "For wireframing and mock-ups, we use Adobe Illustrator and Figma", elementType: 'p'},
+        { text: "For sites such as portfolio websites, informational pages, business sites, or blog pages that do not require a dedicated server, we prefer to use React", elementType: 'p'},
+        { text: "For sites that need user login portals, paywalls, forums, or services that do require a dedicated server to store data, we like to build that server with Python and Flask", elementType: 'p'},
+        { text: "When we need an eCommerce solution, we look no further than our Shopify developer partnership", elementType: 'p'},
+        { text: "We are also fully capable of creating static HTML, CSS and JavaScript sites. Inspect this source code!", elementType: 'p'}
+      ]
     ];
-    const slide2Lines = [
-      { text: "Our process starts with a free consultation with our lead developer", elementType: 'p' },
-      { text: "You'll discuss your needs, pain points and goals, as well get a technical overview of your project, timeframe and cost", elementType: 'p' }
+    const slide3Lists = [
+      ['Color schemes', 'Typography', 'Logo design', 'Brand image', 'Necessary functionality'],
+      ['Long-term goals', 'Cost comparisons', 'Building your tech stack', 'SEO', 'and more!']
     ];
-    const slide3Lines = [
-      { text: "This is the part of the process where you will be most involved, guiding us to see what you see", elementType: 'p'},
-      { text: "You are empowered to lead your own project. You'll help us figure out...", elementType: 'p'}
-    ];
-    const slide3List1 = ['Color schemes', 'Typography', 'Logo design', 'Brand image', 'Necessary functionality'];
-    const slide3List2 = ['Long-term goals', 'Cost comparisons', 'Building your tech stack', 'SEO', 'and more!'];
-    const slide4Lines = [
-      { text: "Our talented lead designer will transfer the mock-up onto the screen", elementType: 'p'},
-      { text: "We will request your opinion throughout the process to make sure we are capturing your vision exactly", elementType: 'p'},
-      { text: "Then, the wireframes will be delivered to you for final approval", elementType: 'p'}
-    ];
-    const slide5Lines = [
-      { text: "Kick back and relax. Your project has now been passed to our development team, and they're hard at work", elementType: 'p'},
-      { text: "They will recreate the wireframe perfectly, as well as add in the functionality you laid out earlier", elementType: 'p'},
-      { text: "You may request a check-in at any time! You will be in direct contact with the lead developer from start to finish", elementType: 'p'}
-    ];
-    const slide6Lines = [
-      { text: "This is where we truly start to set ourselves apart from the competition", elementType: 'p'},
-      { text: "We handle domain purchase and DNS setup, domain propogation and TLS certification, as well as anything else that is needed to get your site up and running", elementType: 'p'},
-      { text: "But getting you up and running is not the end of our commitment", elementType: 'p'}
-    ];
-    const slide7Lines = [
-      { text: "Yep! Next, we will fully optimize your website", elementType: 'p'},
-      { text: "From SEO to accessibility to performance, we will get your site running perfectly, not just running", elementType: 'p'},
-      { text: "But even getting it running perfectly still isn't the end!", elementType: 'p'}
-    ];
-    const slide8Lines = [
-      { text: "That's why we'll take 3 months to teach you while providing comprehensive technical suppport", elementType: 'p'},
-      { text: "Through 1-on-1 training, you'll learn exactly what you need to know to make the best use of your new website", elementType: 'p'},
-      { text: "Our development team are fastidious documenters. If you are inclined, we will also show you how to lightly modify your system", elementType: 'p'}
-    ];
-    const slide9Lines = [
-      { text: "All of the technologies we use are lightweight and highly modular, allowing them to be built upon easily", elementType: 'p'},
-      { text: "When you are ready to add new features into your website or service, we will be able to do so quickly and efficiently", elementType: 'p'},
-      { text: "We are the last place you will ever need to go for your web services. Speaking of those technologies...", elementType: 'p'}
-    ];
-    const slide10Lines = [
-      { text: "For wireframing and mock-ups, we use Adobe Illustrator and Figma", elementType: 'p'},
-      { text: "For sites such as portfolio websites, informational pages, business sites, or blog pages that do not require a dedicated server, we prefer to use React", elementType: 'p'},
-      { text: "For sites that need user login portals, paywalls, forums, or services that do require a dedicated server to store data, we like to build that server with Python and Flask", elementType: 'p'},
-      { text: "When we need an eCommerce solution, we look no further than our Shopify developer partnership", elementType: 'p'},
-      { text: "We are also fully capable of creating static HTML, CSS and JavaScript sites. Inspect this source code!", elementType: 'p'}
-    ];
-
 
     async function typeOutSlide1() {
+      const slide1Lines = slideLines[0]; // Retrieve the appropriate lines from the lines array
       const content = slideContent[0]; // Get the stored content for slide 1
+
       if (content) {
         slide1Container.innerHTML = content; // Display the stored content
       } else {
@@ -195,7 +200,7 @@ function startTypingAnimation() {
             slideInImagesAndCaptions(); // Fade in images and captions when the third line is being typed
           }
     
-          if (i === slide1Lines.length - 1) {
+          if (i === slide1Lines.length - 1) {2
             isSlide1Rendered = true; // Set the variable to true after the final line is typed
           }
         }
@@ -208,24 +213,58 @@ function startTypingAnimation() {
           isFirstSlideRendered = true; // Set the variable to true after the final line is typed
         }
       }
-    }                    
+    }                  
 
     async function typeOutSlide2() {
+      const slide2Lines = slideLines[1]; // Retrieve the appropriate lines from the lines array
       const content = slideContent[1]; // Get the stored content for slide 2
+    
       if (content) {
         slide2Container.innerHTML = content; // Display the stored content
       } else {
+        let nextLineSpeed = typingSpeed; // Typing speed for the next line
+    
         for (let i = 0; i < slide2Lines.length; i++) {
-          await typeOutText(slide2Container, slide2Lines[i].text, typingSpeed, slide2Lines[i].elementType);
-          await new Promise((resolve) => setTimeout(resolve, 2000)); // Delay 2000ms before rendering the next line
+          let isRendered = false; // Flag to track if the line has been rendered
+    
+          const renderNextLine = () => {
+            if (!isRendered) {
+              isRendered = true;
+              typeOutText(slide2Container, slide2Lines[i].text, nextLineSpeed, slide2Lines[i].elementType);
+            }
+          };
+    
+          const handleKeyPress = (event) => {
+            const keyPressed = event.key;
+            if (keyPressed === "Enter" || keyPressed === " ") {
+              window.removeEventListener("keydown", handleKeyPress);
+              nextLineSpeed = 10; // Set typing speed to 10 for the next line
+              renderNextLine();
+            }
+          };
+    
+          window.addEventListener("keydown", handleKeyPress);
+    
+          await new Promise((resolve) => {
+            setTimeout(() => {
+              window.removeEventListener("keydown", handleKeyPress);
+              nextLineSpeed = typingSpeed; // Reset typing speed to default
+              renderNextLine();
+              resolve();
+            }, 1500); // Delay 1500ms before rendering the next line
+          });
         }
+    
         slideContent[1] = slide2Container.innerHTML; // Store the rendered content for slide 2
       }
-    }
+    }        
 
     async function fadeInSlide3List1() {
+      const slide3List1 = slide3Lists[0];
       const container = document.querySelector('.design-list1');
-      container.style.visibility = 'hidden'; // Set the container visibility to hidden initially
+      container.style.visibility = 'hidden';
+    
+      let nextItemSpeed = 2000;
     
       for (let i = 0; i < slide3List1.length; i++) {
         const listItem = document.createElement("li");
@@ -233,21 +272,44 @@ function startTypingAnimation() {
         listItem.style.opacity = 0;
         listItem.style.transition = "opacity 1.5s";
     
-        container.appendChild(listItem); // Append the list item to the container
+        container.appendChild(listItem);
       }
     
-      container.style.visibility = 'visible'; // Make the container visible
+      container.style.visibility = 'visible';
     
-      for (let i = 0; i < slide3List1.length; i++) {
-        const listItem = container.children[i];
-        await new Promise((resolve) => setTimeout(resolve, 2000)); // Delay 2000ms before rendering the next list item
-        listItem.style.opacity = 1; // Fade in the list items
-      }
+      return new Promise((resolve) => {
+        const fadeNextItem = async (index) => {
+          if (index < slide3List1.length) {
+            const listItem = container.children[index];
+            await new Promise((resolve) => setTimeout(resolve, nextItemSpeed));
+            listItem.style.opacity = 1;
+            fadeNextItem(index + 1);
+          } else {
+            window.removeEventListener("keydown", handleKeyPress); // Remove the event listener after the final list item is faded in
+            resolve(); // Resolve the promise when list 1 finishes fading in
+          }
+        };
+    
+        const handleKeyPress = (event) => {
+          const keyPressed = event.key;
+          if (keyPressed === "Enter" || keyPressed === " ") {
+            nextItemSpeed = 500;
+            fadeNextItem(0);
+          }
+        };
+    
+        window.addEventListener("keydown", handleKeyPress);
+    
+        fadeNextItem(0);
+      });
     }
     
     async function fadeInSlide3List2() {
+      const slide3List2 = slide3Lists[1];
       const container = document.querySelector('.design-list2');
-      container.style.visibility = 'hidden'; // Set the container visibility to hidden initially
+      container.style.visibility = 'hidden';
+    
+      let nextItemSpeed = 2000;
     
       for (let i = 0; i < slide3List2.length; i++) {
         const listItem = document.createElement("li");
@@ -255,27 +317,69 @@ function startTypingAnimation() {
         listItem.style.opacity = 0;
         listItem.style.transition = "opacity 1.5s";
     
-        container.appendChild(listItem); // Append the list item to the container
+        container.appendChild(listItem);
       }
     
-      container.style.visibility = 'visible'; // Make the container visible
+      container.style.visibility = 'visible';
     
-      for (let i = 0; i < slide3List2.length; i++) {
-        const listItem = container.children[i];
-        await new Promise((resolve) => setTimeout(resolve, 2000)); // Delay 2000ms before rendering the next list item
-        listItem.style.opacity = 1; // Fade in the list items
-      }
-    }    
+      return new Promise((resolve) => {
+        const fadeNextItem = async (index) => {
+          if (index < slide3List2.length) {
+            const listItem = container.children[index];
+            await new Promise((resolve) => setTimeout(resolve, nextItemSpeed));
+            listItem.style.opacity = 1;
+            fadeNextItem(index + 1);
+          } else {
+            window.removeEventListener("keydown", handleKeyPress); // Remove the event listener after the final list item is faded in
+            resolve(); // Resolve the promise when list 2 finishes fading in
+          }
+        };
+    
+        const handleKeyPress = (event) => {
+          const keyPressed = event.key;
+          if (keyPressed === "Enter" || keyPressed === " ") {
+            nextItemSpeed = 500;
+            fadeNextItem(0);
+          }
+        };
+    
+        window.addEventListener("keydown", handleKeyPress);
+    
+        fadeNextItem(0);
+      });
+    }            
     
     async function typeOutSlide3() {
+      const slide3Lines = slideLines[2];
       const content = slideContent[2];
+    
       if (content) {
         slide3Container.innerHTML = content;
       } else {
+        let nextLineSpeed = typingSpeed;
+        let delay = 1500;
+    
+        const renderNextLine = async (i) => {
+          const line = slide3Lines[i];
+          await new Promise((resolve) => setTimeout(resolve, delay));
+          await typeOutText(slide3Container, line.text, nextLineSpeed, line.elementType);
+        };
+    
+        const handleKeyPress = (event) => {
+          const keyPressed = event.key;
+          if (keyPressed === "Enter" || keyPressed === " ") {
+            window.removeEventListener("keydown", handleKeyPress);
+            nextLineSpeed = 10;
+            delay = 500;
+          }
+        };
+    
+        window.addEventListener("keydown", handleKeyPress);
+    
         for (let i = 0; i < slide3Lines.length; i++) {
-          await typeOutText(slide3Container, slide3Lines[i].text, typingSpeed, slide3Lines[i].elementType);
-          await new Promise((resolve) => setTimeout(resolve, 1500));
+          await renderNextLine(i);
         }
+    
         slideContent[2] = slide3Container.innerHTML;
       }
     
@@ -286,10 +390,12 @@ function startTypingAnimation() {
     
       await fadeInSlide3List1(); // Render and fade-in list 1
       await fadeInSlide3List2(); // Render and fade-in list 2
-    }    
+    }                    
 
     async function typeOutSlide4() {
+      const slide4Lines = slideLines[3]; // Retrieve the appropriate lines from the lines array
       const content = slideContent[3];
+
       if (content) {
         slide4Container.innerHTML = content;
       } else {
@@ -302,7 +408,9 @@ function startTypingAnimation() {
     }
 
     async function typeOutSlide5() {
+      const slide5Lines = slideLines[4]; // Retrieve the appropriate lines from the lines array
       const content = slideContent[4];
+
       if (content) {
         slide5Container.innerHTML = content;
       } else {
@@ -315,7 +423,9 @@ function startTypingAnimation() {
     }
     
     async function typeOutSlide6() {
+      const slide6Lines = slideLines[5]; // Retrieve the appropriate lines from the lines array
       const content = slideContent[5];
+
       if (content) {
         slide6Container.innerHTML = content;
       } else {
@@ -328,7 +438,9 @@ function startTypingAnimation() {
     }
 
     async function typeOutSlide7() {
+      const slide7Lines = slideLines[6]; // Retrieve the appropriate lines from the lines array
       const content = slideContent[6];
+      
       if (content) {
         slide7Container.innerHTML = content;
       } else {
@@ -341,7 +453,9 @@ function startTypingAnimation() {
     }
 
     async function typeOutSlide8() {
+      const slide8Lines = slideLines[7]; // Retrieve the appropriate lines from the lines array
       const content = slideContent[7];
+
       if (content) {
         slide8Container.innerHTML = content;
       } else {
@@ -354,7 +468,9 @@ function startTypingAnimation() {
     }
 
     async function typeOutSlide9() {
+      const slide9Lines = slideLines[8]; // Retrieve the appropriate lines from the lines array
       const content = slideContent[8];
+
       if (content) {
         slide9Container.innerHTML = content;
       } else {
@@ -365,14 +481,6 @@ function startTypingAnimation() {
         slideContent[8] = slide9Container.innerHTML;
       }
     }
-
-    const slide10Images = [
-      { src: './images/react.png', alt: 'React logo' },
-      { src: './images/flask.png', alt: 'Flask logo' },
-      { src: './images/shopify.svg', alt: 'Shopify partner logo' },
-      { src: './images/illustrator.svg', alt: 'Shopify partner logo' },
-      { src: './images/figma.png', alt: 'Shopify partner logo' },
-    ];
     
     function fadeImagesIntoContainers(images, container, fadeDuration) {
       images.forEach((image, index) => {
@@ -404,7 +512,18 @@ function startTypingAnimation() {
     }                   
 
     async function typeOutSlide10() {
+      // Set image array
+      const slide10Images = [
+        { src: './images/react.png', alt: 'React logo' },
+        { src: './images/flask.png', alt: 'Flask logo' },
+        { src: './images/shopify.svg', alt: 'Shopify partner logo' },
+        { src: './images/illustrator.svg', alt: 'Shopify partner logo' },
+        { src: './images/figma.png', alt: 'Shopify partner logo' },
+      ];
+
+      const slide10Lines = slideLines[9]; // Retrieve the appropriate lines from the lines array
       const content = slideContent[9];
+      
       if (content) {
         slide10Container.innerHTML = content;
       } else {
@@ -421,11 +540,18 @@ function startTypingAnimation() {
     }  
 
     document.getElementsByClassName('fade11');
-    const slide11List1 = ['$5,000+', 'None', 'Full', 'Comprehensive', 'Varies', '✔',  '✔', '✘', '✘', '✘'];
-    const slide11List2 = ['$5-$500/month+', 'Varies', 'Limited', 'Limited', 'Basic(paid)', '✘', '✘', '✘', '✘', '✘'];
-    const slide11List3 = ['$100+', 'None', 'Full', 'Comprehensive', '90 Days', '✔', '✔', '✔', '✔', '✔'];
     
     async function typeOutSlide11() {
+      // Set list array
+      const slide11Lists = [
+        ['$5,000+', 'None', 'Full', 'Comprehensive', 'Varies', '✔',  '✔', '✘', '✘', '✘'],
+        ['$5-$500/month+', 'Varies', 'Limited', 'Limited', 'Basic(paid)', '✘', '✘', '✘', '✘', '✘'],
+        ['$100+', 'None', 'Full', 'Comprehensive', '90 Days', '✔', '✔', '✔', '✔', '✔']
+      ];
+
+      // Retrieve appropriate lists from list array
+      const [slide11List1, slide11List2, slide11List3] = slide11Lists;
+      
       // Apply the 'fade' class to all elements with class 'fade11'
       const fadeElements = document.getElementsByClassName('fade11');
       for (let i = 0; i < fadeElements.length; i++) {
