@@ -40,6 +40,61 @@ body {
     font-weight: bold;
 }
 
+#instructions-button {
+    position: absolute;
+    top: .25rem;
+    font-size: 1.5rem;
+    left: 0;
+    border: none;
+    background: none;
+    font-family: monospace;
+    text-transform: uppercase;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    color: var(--primary);
+}
+#instructions-button:hover {
+    color: var(--tertiary);
+    transform: scale(1.05);
+    margin-left: .5rem;
+    cursor: pointer;
+}
+#instructions-div {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 300px;
+    background: var(--secondary);
+    background-image: url(./images/logo11.svg);
+    background-position: center;
+    background-blend-mode: screen;
+    padding: 1rem;
+    border-radius: 0 0 25px 0;
+    border: 2px dotted var(--primary);
+    border-left: none;
+    border-top: none;
+}
+#instructions-div p {
+    color: var(--primary);
+    font-family: var(--font1);
+    margin: 0;
+    font-weight: bold;
+    line-height: 1.5rem;
+}
+#instructions-div a {
+    text-decoration: none;
+    color: var(--tertiary);
+}
+.close-button {
+    position: absolute;
+    top: .25rem;
+    right: .2rem;
+    font-size: 1.5rem;
+    color: var(--primary);
+    border: none;
+    background: none;
+}
+
 /* Banner styles */
 .banner1 {
     background-image: url(./images/teamwork.png);
@@ -61,17 +116,17 @@ body {
     margin-right: 2rem;
 }
 .banner3 {
-    height: 35vh;
+    height: 30vh;
     display: flex;
     justify-content: center;
 }
 .banner3 img {
-    height: 35vh;
+    height: 33vh;
     margin-left: 10rem;
 }
 .banner4 {
     background-image: url(./images/develop.jpg);
-    height: 35vh;
+    height: 30vh;
     background-size: cover;
     background-position: center;
 }
@@ -127,13 +182,14 @@ body {
 .inner-container1 {
     text-align: center;
     color: var(--primary);
-    margin: 2rem 0;
+    margin: 2rem 0 1rem;
 }
 .inner-container1 h1 {
     font-size: 4rem;
     text-align: left;
     margin-left: 3rem;
     font-family: var(--font1);
+    margin-top: 4rem;
 }
 .inner-container1 h2 {
     font-size: 3rem;
@@ -195,7 +251,7 @@ body {
     font-size: 3rem;
     display: flex;
     justify-content: flex-end;
-    margin-right: 2rem;
+    margin: 0 2rem 1rem 1rem;
 }
 .inner-container3 p {
     color: var(--primary);
@@ -247,6 +303,7 @@ body {
     font-family: var(--font2);
     text-align: center;
     font-size: 2rem;
+    margin-right: .25rem;
 }
 
 .inner-container4-content {
@@ -276,6 +333,7 @@ body {
     font-family: var(--font2);
     font-size: 2rem;
     margin-left: 5rem;
+    margin-right: .25rem;
 }
 
 /* Styles for slide 6 text and containers */
@@ -301,9 +359,9 @@ body {
     height: 100%;
 }
 .inner-container7 h2 {
-    display: flex;
-    justify-content: flex-end;
-    flex-direction: column;
+    width: -moz-fit-content;
+    width: fit-content;
+    margin: auto;
     font-family: var(--font1);
     color: var(--secondary);
     font-size: 4rem;
@@ -311,11 +369,16 @@ body {
 .inner-container7 p {
     font-size: 2rem;
     font-family: var(--font2);
-    color: var(--tertiary);
+    color: var(--secondary);
     margin: 1rem 1rem 3rem 2rem;
 }
 
 /* Styles for slide 8 text and containers */
+.inner-container8-content {
+    display: flex;
+    flex-direction: column;
+    height: 60%;
+}
 .inner-container8 {
     background: var(--primary);
     height: 100%;
@@ -328,7 +391,8 @@ body {
     color: var(--secondary);
     font-family: var(--font1);
     font-size: 3rem;
-    margin: 1rem 7rem 3rem;
+    margin: auto;
+    text-align: center;
 }
 .inner-container8 p {
     color: var(--secondary);
@@ -345,7 +409,7 @@ body {
 .inner-container9 h2 {
     color: var(--secondary);
     font-family: var(--font1);
-    margin: 0 0 5rem 2rem;
+    margin: 0 0 2rem 2rem;
     font-size: 3rem;
 }
 .inner-container9 p {
@@ -366,13 +430,14 @@ body {
     color: var(--primary);
     font-family: var(--font1);
     font-size: 3rem;
-    margin-left: 4rem;
+    margin-left: 2rem;
 }
 .inner-container10 p {
     font-size: 1.75rem;
     font-family: var(--font2);
     color: var(--primary);
-    margin-left: 4rem;
+    margin-left: 3.75rem;
+    margin-right: .25rem;
 }
 
 #react-image {
@@ -450,12 +515,14 @@ body {
     border-bottom: dashed 1px var(--tertiary);
     width: 90%;
     text-align: center;
-    margin: 0 auto;
+    margin: 0 auto -1rem;
     padding: .5rem 0;
 }
 .fade11 li {
     text-align: left;
+    justify-content: space-between;
     margin-left: .5rem;
+    margin-right: 1rem;
     font-size: 1.15rem;
     display: flex;
     height: 60px;
@@ -502,11 +569,7 @@ strong {
     color: green;
 }
 /* Media queries */
-@media only screen and (max-width: 1700px) {
-    .inner10-image-container {
-        margin-top: 2rem;
-    }
-}
+
 /* Laptops */ 
 @media only screen and (max-width: 1300px) {
     .banner2 {
@@ -517,21 +580,131 @@ strong {
         width: 250px;
     }
 
+    /* Slide 1 */
+    .inner-container1 h1 {
+        font-size: 2.5rem;
+        margin-bottom: 2rem;
+    }
+    .inner-container1 h2 {
+        font-size: 2rem;
+    }
     .inner-container1 p {
-        margin-top: 3rem;
+        margin-top: 4rem;
+        font-size: 1.5rem;
     }
 
+    /* Slide 2 */
     .inner-container2 h2 {
         margin-bottom: 2rem;
         margin-top: 1rem;
+        font-size: 2rem;
     }
     .inner-container2 p {
         margin-bottom: 2rem;
+        font-size: 1.75rem;
+        margin-left: 3rem;
+    }
+
+    /* Slide 3 */
+    .inner-container3 h2 {
+        font-size: 2rem;
+    }
+    .inner-container3 p {
+        font-size: 1.5rem;
+    }
+    .design-list li {
+        font-size: 1.25rem;
+    }
+    .second-p {
+        margin-bottom: 2rem;
+    }
+
+    /* Slide 4 */
+    .inner-container4 h2 {
+        font-size: 2rem;
+    }
+    .inner-container4 p {
+        font-size: 1.5rem;
+    }
+
+    /* Slide 5 */
+    .inner-container5 h2 {
+        font-size: 2rem;
+        margin-bottom: 0;
+    }
+    .inner-container5 p {
+        font-size: 1.4rem;
+    }
+
+    /* Slide 6 */
+    .inner-container6 h2 {
+        font-size: 2rem;
+        margin-bottom: 2rem;
+    }
+    .inner-container6 p {
+        font-size: 1.6rem;
+    }
+
+    /* Slide 7 */
+    .inner-container7 h2 {
+        font-size: 2.5rem;
+    }
+
+    /* Slide 8 */
+    .inner-container8 h2 {
+        font-size: 2.5rem;
+    }
+    .inner-container8 p {
+        margin: 1rem;
+        font-size: 1.75rem;
+    }
+
+    /* Slide 9 */
+    .banner8 {
+        height: 33vh;
+    }
+    .inner-container9 h2 {
+        font-size: 2.75rem;
+    }
+    .inner-container9 p {
+        font-size: 1.5rem;
+    }
+
+    /* Slide 10 */
+    .banner9 img {
+        height: 23vh;
+        margin-left: 44rem;
+    }
+    .inner-container10 h2 {
+        margin-top: -5rem;
+        font-size: 2.5rem;
+    }
+    .inner-container10 p {
+        font-size: 1.15rem;
+    }
+    .inner10-image-container {
+        margin-top: 3.5rem;
+    }
+    #react-image {
+        margin-right: -7.5rem;
+    }
+    .image-container2 img {
+        margin-right: -6rem;
+    }
+
+    /* Slide 11 */
+    .inner-container11 h2 {
+        font-size: 3rem;
+        padding-top: 0;
+        margin-bottom: 1rem;
+    }
+    .fade11 {
+        width: 26%;
     }
 }
 
 /* Portrait phones */ 
-@media only screen and (max-width: 500px) and (orientation: portrait) {
+@media only screen and (max-width: 600px) and (orientation: portrait) {
     .inner-container {
         height: 100%;
     }
@@ -551,9 +724,6 @@ strong {
     .inner-container1 p {
         margin: 5rem .5rem 0;
     }
-    .inner1-img-container {
-        display: none;
-    }
     .inner-container2 h2 {
         margin: 1rem 0 2rem 1rem;
         font-size: 1.5rem;
@@ -561,5 +731,82 @@ strong {
     .inner-container2 p {
         font-size: 1.25rem;
         margin: 0 0 1rem 1rem;
+    }
+}
+
+/* Walking queries */
+@media only screen and (max-width: 1100px) {
+    .inner1-img-container {
+        display: none;
+    }
+}
+@media only screen and (max-width: 956px) {
+    .design-list2 {
+        margin-top: 1rem;
+    }
+}
+@media only screen and (max-width: 916px) {
+    .banner9 img {
+        margin-right: 10rem;
+    }
+}
+@media only screen and (max-width: 826px) {
+    .inner-container5 h2 {
+        font-size: 1.75rem;
+    }
+    .inner-container5  p {
+        font-size: 1.25rem;
+    }
+}
+@media only screen and (max-width: 812px) {
+    .banner6 img {
+        margin-top: 0;
+    }
+    strong {
+        width: 8rem;
+        font-size: 1rem;
+    }
+    .fade11 li {
+        border-bottom: dotted var(--primary) 1px;
+        margin-right: 0;
+    }
+}
+@media only screen and (max-width: 794px) {
+    .banner9 img {
+        display: none;
+    }
+}
+@media only screen and (max-width: 750px) {
+    .inner-container6 p {
+        font-size: 1.2rem;
+    }
+    .inner10-image-container {
+        margin-top: 0;
+    }
+}
+@media only screen and (max-width: 710px) {
+    .inner-container8 p {
+        font-size: 1.6rem;
+    }
+
+    .inner-container9 h2 {
+        font-size: 2.5rem;
+    }
+    .inner-container9 p {
+        margin-bottom: 2rem;
+        margin-left: 2.75rem;
+    }
+}
+@media only screen and (max-width: 692px) {
+    .inner-container3 p {
+        margin-bottom: 0;
+    }
+}
+@media only screen and (max-width: 644px) {
+    .inner-container7 p {
+        font-size: 1.4rem;
+    }
+    .banner8 img {
+        margin-left: 16rem;
     }
 }

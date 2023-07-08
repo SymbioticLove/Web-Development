@@ -16,6 +16,47 @@ const slideContent = [];
 // Track rendering of slide1
 let isFirstSlideRendered = false;
 
+// Function to handle the instructions button
+function handleInstructions() {
+  const instructionsButton = document.getElementById('instructions-button');
+
+  instructionsButton.addEventListener('click', function() {
+    let instructionsDiv = document.getElementById('instructions-div');
+
+    if (!instructionsDiv) {
+      instructionsDiv = document.createElement('div');
+      instructionsDiv.id = 'instructions-div';
+
+      const instructionsText = document.createElement('div');
+      instructionsText.classList.add('instructions-text');
+      instructionsText.innerHTML = `
+        <p>
+          Hey there, beautiful! Here, you can take a brief tour of our development process! Pressing/holding the enter key or spacebar will speed up the slide animations by
+          immediately finishing the current line. Be advised that reloading mid-slideshow will incur a brief ~5s delay (while slide 1 renders) and then restart the slideshow at slide 2 when you scroll. If
+          this happens, be patient and keep scrolling down and you'll be good to go shortly! If you've already heard the song and dance and are just here to
+          get in contact with us, you can skip straight to <a href="#Schedule">scheduling a consultation</a>. 
+        </p>
+      `;
+      instructionsDiv.appendChild(instructionsText);
+
+      const closeButton = document.createElement('button');
+      closeButton.textContent = 'X';
+      closeButton.classList.add('close-button');
+      closeButton.addEventListener('click', function() {
+        instructionsDiv.remove();
+      });
+      instructionsDiv.appendChild(closeButton);
+
+      document.body.appendChild(instructionsDiv);
+    } else {
+      instructionsDiv.remove();
+    }
+  });
+}
+
+// Call the handleInstructions() function to initialize the instructions functionality
+handleInstructions();
+
 // Function to update the scroll position
 function updateScrollPosition() {
   const slideHeight = window.innerHeight;
@@ -34,23 +75,36 @@ function updateScrollPosition() {
 }
 
 // Function to type out the text within the inner container
-function typeOutText(container, text, typingSpeed, elementType) {
+async function typeOutText(container, text, typingSpeed, elementType) {
   return new Promise((resolve) => {
+    let index = 0;
     const line = document.createElement(elementType);
     container.appendChild(line);
 
-    let index = 0;
-    const interval = setInterval(() => {
+    const typingInterval = setInterval(() => {
       line.textContent = text.slice(0, index + 1);
       index++;
 
       if (index >= text.length) {
-        clearInterval(interval);
-        resolve(); // Resolve the promise when typing is complete
+        clearInterval(typingInterval);
+        resolve(); // Resolve the promise when the line is finished rendering
       }
     }, typingSpeed);
+
+    const handleKeyDown = (event) => {
+      if (event.key === 'Enter' || event.key === ' ') {
+        event.preventDefault();
+        clearInterval(typingInterval);
+        line.textContent = text; // Set the line's content to the final text
+        document.removeEventListener('keydown', handleKeyDown);
+        resolve(); // Resolve the promise when the line is finished rendering
+      }
+    };
+
+    document.addEventListener('keydown', handleKeyDown);
   });
 }
+
 
 const slide1Images = [
   { src: './images/idea.jpg', alt: 'idea'},
@@ -59,30 +113,49 @@ const slide1Images = [
   { src: './images/deploy.jpg', alt: 'deploy'}
 ];
 
+async function renderNextLine(line) {
+  await typeOutText(line.text, typingSpeed, line.elementType);
+}
+
 function slideInImagesAndCaptions() {
-  const slide1Container = document.querySelector('.image-container');
+  const slideContainer = slides[currentSlideIndex].querySelector('.image-container');
   const slideHeight = window.innerHeight;
 
-  for (let i = 0; i < slide1Images.length; i++) {
-    const image = document.createElement('img');
-    image.src = slide1Images[i].src;
-    image.alt = slide1Images[i].alt;
-    image.style.transform = `translateY(${slideHeight}px)`; // Set initial position below the screen
-    slide1Container.appendChild(image);
+  return new Promise((resolve) => {
+    const imagePromises = [];
 
-    // Calculate the delay based on the index of the image
-    const delay = (i) * 1200; // Delay each image by 1200ms (1 second) except the first
-    setTimeout(() => {
-      image.style.transition = 'transform 1.3s'; // Set transition duration for transform property
-      image.style.transform = 'translateY(0)'; // Move the image to its final resting position
-    }, delay);
-  }
+    for (let i = 0; i < slide1Images.length; i++) {
+      const image = document.createElement('img');
+      image.src = slide1Images[i].src;
+      image.alt = slide1Images[i].alt;
+      image.style.transform = `translateY(${slideHeight}px)`; // Set initial position below the screen
+      slideContainer.appendChild(image);
+
+      // Calculate the delay based on the index of the image
+      const delay = i * 1200; // Delay each image by 1200ms (1 second) except the first
+      const imagePromise = new Promise((resolve) => {
+        setTimeout(() => {
+          image.style.transition = 'transform 1.3s'; // Set transition duration for transform property
+          image.style.transform = 'translateY(0)'; // Move the image to its final resting position
+          resolve();
+        }, delay);
+      });
+
+      imagePromises.push(imagePromise);
+    }
+
+    Promise.all(imagePromises).then(() => {
+      setTimeout(() => {
+        isFirstSlideRendered = true; // Set the flag to true after all images finish transitioning
+        resolve();
+      }, 1000); // Delay the completion promise by an additional 1000ms
+    });
+  });
 }
 
 // Function to initialize the typing animation after a delay
 function startTypingAnimation() {
   setTimeout(async () => {
-    const slide1Container = document.querySelector('.inner-container1');
     const slide2Container = document.querySelector('.inner-container2-content');
     const slide3Container = document.querySelector('.inner-container3-content');
     const slide4Container = document.querySelector('.inner-container4-content');
@@ -151,115 +224,50 @@ function startTypingAnimation() {
     ];
 
     async function typeOutSlide1() {
-      const slide1Lines = slideLines[0]; // Retrieve the appropriate lines from the lines array
-      const content = slideContent[0]; // Get the stored content for slide 1
-
+      const slide1Lines = slideLines[0];
+      const slideContainer = slides[currentSlideIndex].querySelector('.inner-container1');
+      const content = slideContent[0];
+    
       if (content) {
-        slide1Container.innerHTML = content; // Display the stored content
+        slideContainer.innerHTML = content;
       } else {
-        let isSlide1Rendered = false; // Flag to indicate if slide 1 is rendered completely
-        let slideTriggered = false; // Flag to indicate if the image slide function has been triggered
+        let slideInPromise;
     
         for (let i = 0; i < slide1Lines.length; i++) {
-          const typingPromise = new Promise((resolve) => {
-            const typeText = () => {
-              resolve(typeOutText(slide1Container, slide1Lines[i].text, typingSpeed, slide1Lines[i].elementType));
-            };
+          await typeOutText(slideContainer, slide1Lines[i].text, typingSpeed, slide1Lines[i].elementType);
+          await new Promise((resolve) => setTimeout(resolve, 1500));
     
-            // Apply the delay of 1500ms only if enter or space key were not pressed
-            if (!slideTriggered) {
-              setTimeout(typeText, i * 1500);
-            } else {
-              typeText(); // Trigger immediate typing without delay
-            }
-          });
-    
-          const enterPromise = new Promise((resolve) => {
-            // Listen for the enter key press event
-            const handleKeyPress = (event) => {
-              event.preventDefault(); // Prevent the default action of the enter key or spacebar
-              if (!slideTriggered && (event.key === 'Enter' || event.key === ' ')) {
-                resolve(); // Resolve the promise when enter key or spacebar is pressed before the image slide
-              }
-            };
-    
-            document.addEventListener('keydown', handleKeyPress);
-            // Remove the event listener once resolved or rejected
-            typingPromise.finally(() => {
-              document.removeEventListener('keydown', handleKeyPress);
-            });
-          });
-    
-          // Wait for either typing to complete or enter key/spacebar to be pressed
-          await Promise.race([typingPromise, enterPromise]);
-    
-          if (i === 1 && !slideTriggered) {
-            // Add a delay of 1500ms before triggering the image slide
-            await new Promise((resolve) => setTimeout(resolve, 1500));
-            slideTriggered = true;
-            slideInImagesAndCaptions(); // Fade in images and captions when the third line is being typed
-          }
-    
-          if (i === slide1Lines.length - 1) {2
-            isSlide1Rendered = true; // Set the variable to true after the final line is typed
+          if (i === 1) {
+            slideInPromise = slideInImagesAndCaptions();
           }
         }
     
-        if (!slideTriggered) {
-          slideInImagesAndCaptions(); // Trigger the image slide if Enter or Spacebar was not pressed before
+        if (slideInPromise) {
+          await slideInPromise;
+          await renderNextLine(slide1Lines[2]);
         }
     
-        if (isSlide1Rendered) {
-          isFirstSlideRendered = true; // Set the variable to true after the final line is typed
-        }
+        slideContent[0] = slideContainer.innerHTML;
       }
-    }                  
+    }                      
 
     async function typeOutSlide2() {
       const slide2Lines = slideLines[1]; // Retrieve the appropriate lines from the lines array
       const content = slideContent[1]; // Get the stored content for slide 2
     
       if (content) {
-        slide2Container.innerHTML = content; // Display the stored content
+        slide2Container.innerHTML = content;
       } else {
-        let nextLineSpeed = typingSpeed; // Typing speed for the next line
-    
         for (let i = 0; i < slide2Lines.length; i++) {
-          let isRendered = false; // Flag to track if the line has been rendered
-    
-          const renderNextLine = () => {
-            if (!isRendered) {
-              isRendered = true;
-              typeOutText(slide2Container, slide2Lines[i].text, nextLineSpeed, slide2Lines[i].elementType);
-            }
-          };
-    
-          const handleKeyPress = (event) => {
-            const keyPressed = event.key;
-            if (keyPressed === "Enter" || keyPressed === " ") {
-              window.removeEventListener("keydown", handleKeyPress);
-              nextLineSpeed = 10; // Set typing speed to 10 for the next line
-              renderNextLine();
-            }
-          };
-    
-          window.addEventListener("keydown", handleKeyPress);
-    
-          await new Promise((resolve) => {
-            setTimeout(() => {
-              window.removeEventListener("keydown", handleKeyPress);
-              nextLineSpeed = typingSpeed; // Reset typing speed to default
-              renderNextLine();
-              resolve();
-            }, 1500); // Delay 1500ms before rendering the next line
-          });
+          await typeOutText(slide2Container, slide2Lines[i].text, typingSpeed, slide2Lines[i].elementType);
+          await new Promise((resolve) => setTimeout(resolve, 1500));
         }
-    
-        slideContent[1] = slide2Container.innerHTML; // Store the rendered content for slide 2
+        slideContent[1] = slide2Container.innerHTML;
       }
-    }        
+    }          
 
     async function fadeInSlide3List1() {
+      const catFood = true;
       const slide3List1 = slide3Lists[0];
       const container = document.querySelector('.design-list1');
       container.style.visibility = 'hidden';
@@ -352,49 +360,38 @@ function startTypingAnimation() {
     async function typeOutSlide3() {
       const slide3Lines = slideLines[2];
       const content = slideContent[2];
-    
+
       if (content) {
         slide3Container.innerHTML = content;
       } else {
         let nextLineSpeed = typingSpeed;
         let delay = 1500;
-    
+
         const renderNextLine = async (i) => {
           const line = slide3Lines[i];
           await new Promise((resolve) => setTimeout(resolve, delay));
           await typeOutText(slide3Container, line.text, nextLineSpeed, line.elementType);
         };
-    
-        const handleKeyPress = (event) => {
-          const keyPressed = event.key;
-          if (keyPressed === "Enter" || keyPressed === " ") {
-            window.removeEventListener("keydown", handleKeyPress);
-            nextLineSpeed = 10;
-            delay = 500;
-          }
-        };
-    
-        window.addEventListener("keydown", handleKeyPress);
-    
+
         for (let i = 0; i < slide3Lines.length; i++) {
           await renderNextLine(i);
         }
-    
+
         slideContent[2] = slide3Container.innerHTML;
       }
-    
+
       const paragraphs = slide3Container.getElementsByTagName('p');
       if (paragraphs.length >= 2) {
         paragraphs[1].classList.add('second-p');
       }
-    
+
       await fadeInSlide3List1(); // Render and fade-in list 1
       await fadeInSlide3List2(); // Render and fade-in list 2
     }                    
 
     async function typeOutSlide4() {
-      const slide4Lines = slideLines[3]; // Retrieve the appropriate lines from the lines array
-      const content = slideContent[3];
+      let slide4Lines = slideLines[3]; // Retrieve the appropriate lines from the lines array
+      const content = slideContent[3]; // Retrieve the stored content
 
       if (content) {
         slide4Container.innerHTML = content;
@@ -455,6 +452,7 @@ function startTypingAnimation() {
     async function typeOutSlide8() {
       const slide8Lines = slideLines[7]; // Retrieve the appropriate lines from the lines array
       const content = slideContent[7];
+      const bootyButtCheeks = true;
 
       if (content) {
         slide8Container.innerHTML = content;
@@ -537,16 +535,14 @@ function startTypingAnimation() {
           fadeImagesIntoContainers([slide10Images[i]], imageContainers[i], 1000);
         }
       }
-    }  
-
-    document.getElementsByClassName('fade11');
+    }
     
     async function typeOutSlide11() {
       // Set list array
       const slide11Lists = [
-        ['$5,000+', 'None', 'Full', 'Comprehensive', 'Varies', '✔',  '✔', '✘', '✘', '✘'],
-        ['$5-$500/month+', 'Varies', 'Limited', 'Limited', 'Basic(paid)', '✘', '✘', '✘', '✘', '✘'],
-        ['$100+', 'None', 'Full', 'Comprehensive', '90 Days', '✔', '✔', '✔', '✔', '✔']
+        ['$5,000+', 'None', 'Full', 'Full', 'Varies', '✔',  '✔', '✘', '✘', '✘'],
+        ['$5-$500+', 'Varies', 'Limited', 'Limited', 'Basic', '✘', '✘', '✘', '✘', '✘'],
+        ['$100+', 'None', 'Full', 'Full', '90d', '✔', '✔', '✔', '✔', '✔']
       ];
 
       // Retrieve appropriate lists from list array
@@ -662,7 +658,7 @@ function startTypingAnimation() {
       slideAnimationTriggered[10] = true;
       await typeOutSlide11();
     }
-  }, 2000); // Delay in milliseconds
+  }, 1500); // Delay in milliseconds
 }
 
 // Initialize the first slide
