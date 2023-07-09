@@ -38,7 +38,7 @@ function handleInstructions() {
       instructionsText.classList.add('instructions-text');
       instructionsText.innerHTML = `
         <p>
-          Hey there, beautiful! Here, you can take a brief tour of our development process! Pressing/holding the enter key or spacebar will speed up the slide animations by
+          Hey there! Here, you can take a brief tour of our development process! Pressing/holding the enter key or spacebar will speed up the slide animations by
           immediately finishing the current line. Be advised that reloading mid-slideshow will incur a brief ~5s delay (while slide 1 renders) and then restart the slideshow at slide 2 when you scroll. If
           this happens, be patient and keep scrolling down and you'll be good to go shortly! If you've already heard the song and dance and are just here to
           get in contact with us, you can skip straight to <a href="#Schedule" id="consultation-link">scheduling a consultation</a>. 
