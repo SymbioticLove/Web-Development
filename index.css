@@ -94,6 +94,10 @@ body {
     border: none;
     background: none;
 }
+.close-button:hover {
+    color: var(--tertiary);
+    transform: url(1.05);
+}
 
 /* Banner styles */
 .banner1 {
@@ -546,6 +550,15 @@ strong {
     justify-content: space-around;
 }
 
+.meeting {
+    display: flex;
+    justify-content: center;
+    margin-top: 1rem;
+}
+
+.inner-container12 {
+    height: 25%;
+}
 #container11-list1 > li:nth-child(1) span,
 #container11-list1 > li:nth-child(n+8):nth-child(-n+10) span {
     color: red;

@@ -7,6 +7,9 @@ let currentSlideIndex = 0;
 // Flag to indicate if scrolling is allowed
 let isScrollAllowed = true;
 
+// Speed in milliseconds between each character
+let typingSpeed = 50;
+
 // Array to track if typing animation for each slide has been triggered
 const slideAnimationTriggered = [false, false];
 
@@ -16,9 +19,13 @@ const slideContent = [];
 // Track rendering of slide1
 let isFirstSlideRendered = false;
 
+var watermark = 'Property of Matthew Ford, CEO/Chief Engineer, Symbiotic Love';
+console.log(watermark); // Prints the watermark
+
 // Function to handle the instructions button
 function handleInstructions() {
   const instructionsButton = document.getElementById('instructions-button');
+  let slideJump = false;
 
   instructionsButton.addEventListener('click', function() {
     let instructionsDiv = document.getElementById('instructions-div');
@@ -34,7 +41,7 @@ function handleInstructions() {
           Hey there, beautiful! Here, you can take a brief tour of our development process! Pressing/holding the enter key or spacebar will speed up the slide animations by
           immediately finishing the current line. Be advised that reloading mid-slideshow will incur a brief ~5s delay (while slide 1 renders) and then restart the slideshow at slide 2 when you scroll. If
           this happens, be patient and keep scrolling down and you'll be good to go shortly! If you've already heard the song and dance and are just here to
-          get in contact with us, you can skip straight to <a href="#Schedule">scheduling a consultation</a>. 
+          get in contact with us, you can skip straight to <a href="#Schedule" id="consultation-link">scheduling a consultation</a>. 
         </p>
       `;
       instructionsDiv.appendChild(instructionsText);
@@ -48,6 +55,11 @@ function handleInstructions() {
       instructionsDiv.appendChild(closeButton);
 
       document.body.appendChild(instructionsDiv);
+
+      const consultationLink = document.getElementById('consultation-link');
+      consultationLink.addEventListener('click', function() {
+        slideJump = true; // Update slideJump to true
+      });
     } else {
       instructionsDiv.remove();
     }
@@ -165,7 +177,6 @@ function startTypingAnimation() {
     const slide8Container = document.querySelector('.inner-container8-content');
     const slide9Container = document.querySelector('.inner-container9-content');
     const slide10Container = document.querySelector('.inner-container10-content');
-    let typingSpeed = 50; // Speed in milliseconds between each character
     const slideLines = [
       [
         { text: "Welcome to your comprehensive solution to web services!", elementType: 'h1' },
